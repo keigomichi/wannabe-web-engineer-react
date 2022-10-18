@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
 const TodoApp = () => {
-  const [todos, setTodos] = useState([{ id: 1, name: "task", done: false }]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(sessionStorage.getItem("todos"));
+    setTodos(storageTodos);
+  }, []);
+
+  // useEffect(() => {
+  //   sessionStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   const addTodo = (todo) => {
-    setTodos((prev) => [...prev, todo]);
+    // setTodos((prev) => [...prev, todo]);
+    const newTodos = [...todos, todo];
+    setTodos(newTodos);
+    sessionStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const flipDone = (id) => {
@@ -18,6 +30,7 @@ const TodoApp = () => {
       }
     });
     setTodos(newTodos);
+    sessionStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   return (

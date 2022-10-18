@@ -3,6 +3,7 @@ const Todo = ({ todo, flipDone }) => {
     <>
       <input
         type="checkbox"
+        checked={todo.done ? true : false}
         onChange={() => {
           flipDone(todo.id);
         }}
