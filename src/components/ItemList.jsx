@@ -5,6 +5,7 @@ const ItemList = () => {
     { name: "りんご", price: 300 },
     { name: "バナナ", price: 200 },
     { name: "いちご", price: 1000 },
+    { name: "ぶどう", price: 10000 },
   ]);
 
   return (
