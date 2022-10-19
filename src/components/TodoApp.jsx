@@ -16,7 +16,7 @@ const TodoApp = () => {
 
   const addTodo = (todo) => {
     // setTodos((prev) => [...prev, todo]);
-    const newTodos = [...todos, todo];
+    const newTodos = todos !== null ? [...todos, todo] : [todo];
     setTodos(newTodos);
     sessionStorage.setItem("todos", JSON.stringify(newTodos));
   };
@@ -36,7 +36,11 @@ const TodoApp = () => {
   return (
     <>
       <h2>タスク</h2>
-      <TodoList todos={todos} flipDone={flipDone} />
+      {todos !== null ? (
+        <TodoList todos={todos} flipDone={flipDone} />
+      ) : (
+        <div>タスクはありません</div>
+      )}
       <TodoForm addTodo={addTodo} />
     </>
   );
