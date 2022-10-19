@@ -14,9 +14,19 @@ const TodoApp = () => {
   //   sessionStorage.setItem("todos", JSON.stringify(todos));
   // }, [todos]);
 
+  const compareFn = (a, b) => {
+    if (parseInt(a.rank) < parseInt(b.rank)) {
+      return -1;
+    }
+    if (parseInt(a.rank) > parseInt(b.rank)) {
+      return 1;
+    }
+    return 0;
+  };
+
   const addTodo = (todo) => {
     // setTodos((prev) => [...prev, todo]);
-    const newTodos = todos !== null ? [...todos, todo] : [todo];
+    const newTodos = todos !== null ? [...todos, todo].sort(compareFn) : [todo];
     setTodos(newTodos);
     sessionStorage.setItem("todos", JSON.stringify(newTodos));
   };
