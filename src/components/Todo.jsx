@@ -1,4 +1,8 @@
-const Todo = ({ todo, flipDone }) => {
+import { useState } from "react";
+
+const Todo = ({ todo, deleteTodo, flipDone, changeRank }) => {
+  const [todoRank, setTodoRank] = useState(todo.rank);
+
   const Rank = () => {
     switch (todo.rank) {
       case "1":
@@ -8,6 +12,11 @@ const Todo = ({ todo, flipDone }) => {
       case "3":
         return <span> :低</span>;
     }
+  };
+
+  const changeHandler = (e) => {
+    setTodoRank(e.target.value);
+    changeRank(todo.id, e.target.value);
   };
 
   return (
@@ -23,6 +32,14 @@ const Todo = ({ todo, flipDone }) => {
         {todo.name}
       </span>
       <Rank />
+      <label htmlFor="todoRank">
+        <select id="todoRank" value={todoRank} onChange={changeHandler}>
+          <option value="1">高</option>
+          <option value="2">中</option>
+          <option value="3">低</option>
+        </select>
+      </label>
+      <button onClick={() => deleteTodo(todo.id)}>削除</button>
     </>
   );
 };
